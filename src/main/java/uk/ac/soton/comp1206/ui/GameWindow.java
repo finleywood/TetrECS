@@ -34,7 +34,7 @@ public class GameWindow {
     private BaseScene currentScene;
     private Scene scene;
 
-    final Communicator communicator;
+    Communicator communicator;
 
     /**
      * Create a new GameWindow attached to the given stage with the specified width and height
@@ -57,8 +57,8 @@ public class GameWindow {
         //Setup default scene
         setupDefaultScene();
 
-        //Setup communicator
-        communicator = new Communicator("ws://ofb-labs.soton.ac.uk:9700");
+        //Communicator for multiplayer, add endpoint if required!
+        //communicator = new Communicator("");
 
         //Go to menu
         startMenu();
@@ -160,7 +160,9 @@ public class GameWindow {
      */
     public void cleanup() {
         logger.info("Clearing up previous scene");
-        communicator.clearListeners();
+        if(communicator != null) {
+            communicator.clearListeners();
+        }
     }
 
     /**
